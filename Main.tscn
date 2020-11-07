@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://ItemList.gd" type="Script" id=1]
 [ext_resource path="res://SelectSubject.gd" type="Script" id=2]
+[ext_resource path="res://TextEdit.gd" type="Script" id=3]
 
 [sub_resource type="Theme" id=1]
 
@@ -20,9 +21,14 @@ margin_right = 1008.0
 margin_bottom = 576.0
 highlight_current_line = true
 smooth_scrolling = true
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="SnimiTimer" type="Timer" parent="TextEdit"]
+wait_time = 2.0
+autostart = true
 
 [node name="IzberiPredmet" type="OptionButton" parent="."]
 margin_left = 24.0
@@ -40,7 +46,7 @@ __meta__ = {
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="ItemList" type="ItemList" parent="."]
+[node name="IzberiFajl" type="ItemList" parent="."]
 margin_left = 24.0
 margin_top = 88.0
 margin_right = 160.0
@@ -49,5 +55,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="timeout" from="TextEdit/SnimiTimer" to="TextEdit" method="_on_SnimiTimer_timeout"]
 [connection signal="item_selected" from="IzberiPredmet" to="IzberiPredmet" method="_on_IzberiPredmet_item_selected"]
-[connection signal="prati_ime_na_folder" from="IzberiPredmet" to="ItemList" method="_on_IzberiPredmet_prati_ime_na_folder"]
+[connection signal="prati_ime_na_folder" from="IzberiPredmet" to="IzberiFajl" method="_on_IzberiPredmet_prati_ime_na_folder"]
+[connection signal="prati_tekst" from="IzberiFajl" to="TextEdit" method="_on_IzberiFajl_prati_tekst"]
