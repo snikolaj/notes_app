@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ItemList.gd" type="Script" id=1]
 [ext_resource path="res://SelectSubject.gd" type="Script" id=2]
 [ext_resource path="res://TextEdit.gd" type="Script" id=3]
+[ext_resource path="res://ImeNaNovFajl.gd" type="Script" id=4]
 
 [sub_resource type="Theme" id=1]
 
@@ -15,7 +16,7 @@ __meta__ = {
 }
 
 [node name="TextEdit" type="TextEdit" parent="."]
-margin_left = 184.0
+margin_left = 200.0
 margin_top = 23.0
 margin_right = 1008.0
 margin_bottom = 576.0
@@ -33,7 +34,7 @@ autostart = true
 [node name="IzberiPredmet" type="OptionButton" parent="."]
 margin_left = 24.0
 margin_top = 24.0
-margin_right = 160.0
+margin_right = 176.0
 margin_bottom = 48.0
 text = "Subject"
 clip_text = true
@@ -48,10 +49,40 @@ margin_bottom = 40.0
 
 [node name="IzberiFajl" type="ItemList" parent="."]
 margin_left = 24.0
-margin_top = 88.0
-margin_right = 160.0
+margin_top = 120.0
+margin_right = 176.0
 margin_bottom = 576.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NovFajl" type="Button" parent="."]
+margin_left = 24.0
+margin_top = 56.0
+margin_right = 91.0
+margin_bottom = 76.0
+text = "New File"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ImeNaNovFajl" type="LineEdit" parent="."]
+margin_left = 24.0
+margin_top = 88.0
+margin_right = 176.0
+margin_bottom = 112.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IzbrisiFajl" type="Button" parent="."]
+margin_left = 96.0
+margin_top = 56.0
+margin_right = 160.0
+margin_bottom = 76.0
+text = "Delete File"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -59,3 +90,7 @@ __meta__ = {
 [connection signal="item_selected" from="IzberiPredmet" to="IzberiPredmet" method="_on_IzberiPredmet_item_selected"]
 [connection signal="prati_ime_na_folder" from="IzberiPredmet" to="IzberiFajl" method="_on_IzberiPredmet_prati_ime_na_folder"]
 [connection signal="prati_tekst" from="IzberiFajl" to="TextEdit" method="_on_IzberiFajl_prati_tekst"]
+[connection signal="pressed" from="NovFajl" to="IzberiFajl" method="_on_NovFajl_pressed"]
+[connection signal="pressed" from="NovFajl" to="ImeNaNovFajl" method="_on_NovFajl_pressed"]
+[connection signal="pressed" from="IzbrisiFajl" to="IzberiFajl" method="_on_IzbrisiFajl_pressed"]
+[connection signal="pressed" from="IzbrisiFajl" to="ImeNaNovFajl" method="_on_IzbrisiFajl_pressed"]

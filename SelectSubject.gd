@@ -5,13 +5,11 @@ signal prati_ime_na_folder(ime)
 
 
 func _ready():
-	fajlovi = list_files_in_directory("predmeti")
+	fajlovi = list_files_in_directory("user://predmeti")
+	print(fajlovi)
 	for fajl in fajlovi:
 		add_item(fajl)
 	
-	
-
-
 
 func list_files_in_directory(path):
 	var files = []

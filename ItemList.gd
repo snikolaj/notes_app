@@ -7,7 +7,7 @@ signal prati_tekst(tekst, ime_na_fajl)
 
 func _process(delta):
 	if is_anything_selected():
-		var fajl_za_isprakjanje = "predmeti/" + izbereno_ime + "/" + fajlovi[get_selected_items()[0]]
+		var fajl_za_isprakjanje = "user://predmeti/" + izbereno_ime + "/" + fajlovi[get_selected_items()[0]]
 		var tekst_za_isprakjanje = load_file(fajl_za_isprakjanje)
 		#predmeti e prv folder kude sto su svi folderi za predmeti
 		#izbereno ime e ime na predmet koj smo ga odbrale
@@ -22,10 +22,8 @@ func _process(delta):
 
 func _on_IzberiPredmet_prati_ime_na_folder(ime):
 	izbereno_ime = ime
-	fajlovi = list_files_in_directory("predmeti/" + ime)
-	clear()
-	for fajl in fajlovi:
-		add_item(fajl)
+	najdi_svi_fajlovi(ime)
+
 
 
 
@@ -41,9 +39,7 @@ func list_files_in_directory(path):
 			break
 		elif not file.begins_with("."):
 			files.append(file)
-
 	dir.list_dir_end()
-
 	return files
 
 func load_file(file):
@@ -55,3 +51,24 @@ func load_file(file):
 		line += " "
 	f.close()
 	return line
+
+
+func izberen_predmet_ime():
+	return izbereno_ime
+
+func najdi_svi_fajlovi(ime):
+	fajlovi = list_files_in_directory("user://predmeti/" + ime)
+	clear()
+	print(fajlovi)
+	for fajl in fajlovi:
+		add_item(fajl)
+
+
+func _on_IzbrisiFajl_pressed():
+	yield(get_tree().create_timer(1.0), "timeout")
+	najdi_svi_fajlovi(izbereno_ime)
+
+
+func _on_NovFajl_pressed():
+	yield(get_tree().create_timer(1.0), "timeout")
+	najdi_svi_fajlovi(izbereno_ime)
